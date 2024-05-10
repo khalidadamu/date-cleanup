@@ -4,8 +4,8 @@ Sub CleanUpDates()
     Dim cell As Range
     Dim dateValue As Variant
     
-    ' Set the worksheet where your data is located
-    Set ws = ThisWorkbook.Sheets("ZENITH USD") ' Replace "Sheet1" with your sheet name
+    ' Set the worksheet where your data is located  Replace "Sheet1" with your sheet name
+    Set ws = ThisWorkbook.Sheets("Sheet_name") 
     
     ' Assuming your date data is in column H, adjust accordingly if it's in a different column
     Set rng = ws.Range("H:H")
@@ -18,14 +18,14 @@ Sub CleanUpDates()
         ' Check if the cell is not empty and contains text
         If Not IsEmpty(cell) And IsDate(cell.Value) Then
             ' Attempt to convert text representations of dates to Excel date values using DATEVALUE function
-            On Error Resume Next ' Ignore errors during conversion
+            On Error Resume Next 
             cell.Value = Application.WorksheetFunction.dateValue(cell.Value)
-            On Error GoTo 0 ' Turn off error handling
+            On Error GoTo 0 
             
             ' Check if the conversion was successful
             If IsDate(cell.Value) Then
                 ' Format the cell as a date
-                cell.NumberFormat = "mm/dd/yyyy" ' Adjust the date format as needed
+                cell.NumberFormat = "mm/dd/yyyy" 
             Else
                 ' Display a message if the conversion failed
                 MsgBox "Unable to clean date in cell " & cell.Address
